@@ -1,6 +1,5 @@
 A = int(input())
-B = int(input())
-N = int(input())
-S = ((A * 100 + B) * N) % 100
-F = ((A * 100 + B) * N) // 100
-print(F, S)
+if A % 4 == 0 and A % 100 != 0 or A % 400 == 0:
+    print('YES')
+else:
+    print('NO')
