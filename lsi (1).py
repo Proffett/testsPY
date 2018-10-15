@@ -4,9 +4,9 @@ import urllib.parse
 import sys
 import time
 import json
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extracti on.text import CountVectorizer
 import pandas as pd
-from pymorphy2 import MorphAnalyzer
+from pymorphy2 import MorphAn alyzer
 m = MorphAnalyzer()
 query_text = "очки виртуальной реальности"
 auth_token = "AQAAAAABN0XoAAU2LqpddWTa8EI2tB233hvNF7E"
@@ -50,10 +50,7 @@ for url in soup.findAll('url'):
 
 
 #путь к файлу, куда запишем весь текст, полученный при парсинге страниц:
-sys.stdout.close()
-sys.stdout = open("C:\\Users\\evgen\\Documents\\result.txt", "w", encoding="utf-8")
-texts = [z.rstrip() for z in open('C:\\Users\\evgen\\Documents\\out.txt', encoding='utf-8')]
-stop_words = [z.rstrip() for z in open('C:\\Users\\evgen\\Documents\\stop_words.txt', encoding='utf-8')]
+sys.stdout = open("C:\\Users\\evgen\\Documents\\url_list.txt", "w", encoding="utf-8")
 
 #Нам лишь нужно найти наиболее часто употребляемые N-граммы в текстах ТОП 50.
 urls = [z.rstrip() for z in open('C:\\Users\\evgen\\Documents\\Texts_Analyze\\url_list.txt')]
@@ -66,7 +63,10 @@ for url in urls:
 
     for pp in soup.select("p"):
         print(pp.text)
-
+sys.stdout.close()
+sys.stdout = open("C:\\Users\\Evgen\\Documents\\result.txt", "w", encoding="utf-8")
+texts = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\out.txt', encoding='utf-8')]
+stop_words = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\stop_words.txt', encoding='utf-8')]
 
 #Приступаем к анализу полученных данных.
 #Указываем файл, куда запишем результаты, загружаем данные парсинга и список стоп-слов, которые мы хотим исключить из анализа N-грамм (предлоги, союзы, технические и коммерческие слова и т.д.)
