@@ -16,7 +16,7 @@ query_text = "очки виртуальной реальности"
 auth_token = "AQAAAAABN0XoAAU2LB8jCEqxKE2_umpAvbYZkTQ"
 
 url = 'https://api-sandbox.direct.yandex.ru/live/v4/json/'
-data = {'token': auth_token, 'method':'CreateNewWordstatReport', 'param': {'Phrases': [query_text]}}
+data = {'token': auth_token, 'method': 'CreateNewWordstatReport', 'param': {'Phrases': [query_text]}}
 body = json.dumps(data, ensure_ascii=False)
 answer = requests.post(url, body.encode('utf-8'), headers={'Content-type': 'application/json; charset=utf-8'})
 response = answer.json()
@@ -27,7 +27,7 @@ time.sleep(10)
 
 # Подставляем в свойство param наш id и обращаемся к API.
 url = 'https://api-sandbox.direct.yandex.ru/live/v4/json/'
-data = {'token': auth_token, 'method':'GetWordstatReport', 'param': id}
+data = {'token': auth_token, 'method': 'GetWordstatReport', 'param': id}
 body = json.dumps(data, ensure_ascii=False)
 report = requests.post(url, body.encode('utf-8'), headers={'Content-type': 'application/json; charset=utf-8'})
 response = report.json()
@@ -55,10 +55,8 @@ sys.stdout = open("C:\\Users\\Evgen\\Documents\\result.txt", "w", encoding="utf-
 texts = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\out.txt', encoding='utf-8')]
 stop_words = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\stop_words.txt', encoding='utf-8')]
 
-
 for pp in soup.select("p"):
-        print(pp.text)
-
+    print(pp.text)
 
 # Нам лишь нужно найти наиболее часто употребляемые N-граммы в текстах ТОП 50.
 urls = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\Texts_Analyze\\url_list.txt')]
