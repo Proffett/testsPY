@@ -28,3 +28,5 @@ elif b > a:
     print(a, b, c)
 elif b > c:
     print(c, b, a)
+
+print("ok")     #ok
