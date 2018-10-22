@@ -7,9 +7,10 @@ import json
 from sklearn.feature_extracti on.text import CountVectorizer
 import pandas as pd
 from pymorphy2 import MorphAn alyzer
+from path import path
 m = MorphAnalyzer()
 query_text = "очки виртуальной реальности"
-auth_token = "AQAAAAABN0XoAAU2LqpddWTa8EI2tB233hvNF7E"
+auth_token = "AQAAAAABN0XoAAU2LB8jCEqxKE2_umpAvbYZkTQ"
 
 url = 'https://api-sandbox.direct.yandex.ru/live/v4/json/'
 data = {'token': auth_token, 'method':'CreateNewWordstatReport', 'param': {'Phrases': [query_text]}}
@@ -70,7 +71,7 @@ stop_words = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\stop_words.
 
 #Приступаем к анализу полученных данных.
 #Указываем файл, куда запишем результаты, загружаем данные парсинга и список стоп-слов, которые мы хотим исключить из анализа N-грамм (предлоги, союзы, технические и коммерческие слова и т.д.)
-urls = [z.rstrip() for z in open('C:\\Users\\iburmistrov\\Documents\\Texts_Analyze\\url_list.txt')]
+urls = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\Texts_Analyze\\url_list.txt')]
 for url in urls:
     try:
         response = requests.get(url, timeout=None)
@@ -93,7 +94,7 @@ for ng_count, ng_text in sorted([(count_values[i],k) for k,i in vb.items()], rev
 
 #Все, что нужно дальше, – записать все результаты в один Excel-файл:
 info_data = pd.read_csv('C:\\Users\\evgen\\Documents\\result.txt', encoding='utf-8', sep="\t", header=None)
-filename = 'C:\\Users\\UserName\\Documents\\' + query_text + '.xlsx'
+filename = 'C:\\Users\\Evgen\\Documents\\' + query_text + '.xlsx'
 writer = pd.ExcelWriter(filename)
 info_data.to_excel(writer,'NGrams', encoding='utf-8', index=False)
 sa_df.to_excel(writer,'SearchedAlso', encoding='utf-8', index=False)
