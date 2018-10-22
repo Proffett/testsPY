@@ -28,7 +28,8 @@ body = json.dumps(data, ensure_ascii=False)
 report = requests.post(url, body.encode('utf-8'), headers={'Content-type': 'application/json; charset=utf-8'})
 response = report.json()
 
-# сформировать два датафрейма, где один отвечает за столбец в Вордстат «Что искали со словом…» (SearchedWith), а второй – за похожие запросы (SearchedAlso).
+# сформировать два датафрейма, где один отвечает за столбец в Вордстат «Что искали со словом…» (SearchedWith),
+# а второй – за похожие запросы (SearchedAlso).
 sa_df = pd.DataFrame(response['data'][0]['SearchedAlso'])
 sw_df = pd.DataFrame(response['data'][0]['SearchedWith'])
 
@@ -73,13 +74,15 @@ for url in urls:
     for pp in soup.select("p"):
         print(pp.text)
 
-# Указываем файл, куда запишем результаты, загружаем данные парсинга и список стоп-слов, которые мы хотим исключить из анализа N-грамм (предлоги, союзы, технические и коммерческие слова и т.д.)
+# Указываем файл, куда запишем результаты, загружаем данные парсинга и список стоп-слов,
+#  которые мы хотим исключить из анализа N-грамм (предлоги, союзы, технические и коммерческие слова и т.д.)
 sys.stdout.close()
 sys.stdout = open("C:\\Users\\Evgen\\Documents\\result.txt", "w", encoding="utf-8")
 texts = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\out.txt', encoding='utf-8')]
 stop_words = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\stop_words.txt', encoding='utf-8')]
 
-# приводим все слова к их исходной форме, настраиваем CountVectorizer на подсчет N-грамм с количеством слов от 2 до 4 и записываем результат в файл.
+# приводим все слова к их исходной форме,
+# настраиваем CountVectorizer на подсчет N-грамм с количеством слов от 2 до 4 и записываем результат в файл.
 cvn = CountVectorizer(ngram_range=(2, 4), stop_words=stop_words)
 words_nf = [' '.join([m.parse(word)[0].normal_form for word in x.split()]) for x in texts]
 ngrams = cvn.fit_transform(words_nf)
