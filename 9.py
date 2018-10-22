@@ -1,18 +1,2 @@
-a = int(input())
-b = int(input())
-c = int(input())
-if a >= b and a >= c:
-    print(a)
-elif b >= a and b >= c:
-    print(b)
-else:
-    print(c)
-if a <= b and a <= c:
-    print(a)
-elif b <= a and b <= c:
-    print(b)
-else:
-    print(c)
-l = [a, b, c]
-f = (a + b + c)
-print(f - (min(l) + max(l)))
+N = int(input())
+print(N + 2 + N+2))
