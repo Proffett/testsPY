@@ -9,7 +9,7 @@ import pandas as pd
 from pymorphy2 import MorphAnalyzer
 
 m = MorphAnalyzer()
-query_text = "осевой вентилятор"
+query_text = "seo optimization"
 auth_token = "AQAAAAABN0XoAAU2LB8jCEqxKE2_umpAvbYZkTQ"
 url = 'https://api-sandbox.direct.yandex.ru/live/v4/json/'
 data = {'token': auth_token, 'method': 'CreateNewWordstatReport', 'param': {'Phrases': [query_text]}}
@@ -19,7 +19,7 @@ response = answer.json()
 id = response['data']
 
 # формирование отчета
-time.sleep(10)
+time.sleep(15)
 
 # Подставляем в свойство param наш id и обращаемся к API.
 url = 'https://api-sandbox.direct.yandex.ru/live/v4/json/'
@@ -51,18 +51,6 @@ sys.stdout.close()
 sys.stdout = open("C:\\Users\\Evgen\\Documents\\out.txt", "w", encoding="utf-8")
 
 # Нам лишь нужно найти наиболее часто употребляемые N-граммы в текстах ТОП 50.
-urls = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\Texts_Analyze\\url_list.txt', encoding='utf-8')]
-for url in urls:
-    try:
-        response = requests.get(url, timeout=None)
-    except:
-        continue
-    soup = BeautifulSoup(response.content, "html.parser")
-
-    for pp in soup.select("p"):
-        print(pp.text)
-
-# Приступаем к анализу полученных данных.
 urls = [z.rstrip() for z in open('C:\\Users\\Evgen\\Documents\\url_list.txt', encoding='utf-8')]
 for url in urls:
     try:
@@ -74,6 +62,7 @@ for url in urls:
     for pp in soup.select("p"):
         print(pp.text)
 
+# Приступаем к анализу полученных данных.
 # Указываем файл, куда запишем результаты, загружаем данные парсинга и список стоп-слов,
 #  которые мы хотим исключить из анализа N-грамм (предлоги, союзы, технические и коммерческие слова и т.д.)
 sys.stdout.close()
